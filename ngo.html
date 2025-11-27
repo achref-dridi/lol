@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>League of Learning</title>
+
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --secondary-color: #1e40af;
+  --accent-color: #3b82f6;
+  --text-dark: #1e293b;
+  --text-light: #64748b;
+  --bg-light: #f8fafc;
+  --bg-white: #ffffff;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --spacing-unit: 8px;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  color: var(--text-dark);
+  background-color: var(--bg-white);
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo h2 {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 32px;
+  align-items: center;
+}
+
+.nav-menu a {
+  color: var(--text-dark);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-menu a:hover {
+  color: var(--primary-color);
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background: var(--text-dark);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(8px, 8px);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+.hero {
+  height: 100vh;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('https://images.pexels.com/photos/8500318/pexels-photo-8500318.jpeg?auto=compress&cs=tinysrgb&w=1600');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.15;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(30, 64, 175, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  color: white;
+  padding: 32px;
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-title {
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hero-slogan {
+  font-size: 1.75rem;
+  margin-bottom: 40px;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 16px 48px;
+  background: white;
+  color: var(--primary-color);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 48px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.about-section {
+  padding: 96px 24px;
+  background: var(--bg-white);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.about-card {
+  background: var(--bg-light);
+  padding: 40px 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.about-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.card-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.about-card p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.problem-section {
+  padding: 96px 24px;
+  background: var(--bg-light);
+}
+
+.problem-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.problem-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.problem-text h3 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+}
+
+.problem-text p {
+  color: var(--text-light);
+  margin-bottom: 16px;
+  line-height: 1.8;
+}
+
+.challenge-list {
+  list-style: none;
+  margin: 24px 0;
+}
+
+.challenge-list li {
+  padding: 12px 0;
+  padding-left: 28px;
+  position: relative;
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.challenge-list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+  font-weight: bold;
+}
+
+.root-causes {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 24px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.root-causes h4 {
+  color: var(--primary-color);
+  margin-bottom: 12px;
+}
+
+.board-section {
+  padding: 96px 24px;
+  background: var(--bg-white);
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-top: 48px;
+}
+
+.board-member {
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.board-member:hover {
+  transform: translateY(-8px);
+}
+
+.member-avatar {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.member-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.board-member h3 {
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  color: var(--text-dark);
+}
+
+.member-role {
+  color: var(--primary-color);
+  font-weight: 600;
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+}
+
+.member-description {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.mission-section {
+  padding: 96px 24px;
+  background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+  color: white;
+}
+
+.mission-section .section-title {
+  color: white;
+}
+
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.mission-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 40px 32px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.mission-card:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-4px);
+}
+
+.mission-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.mission-card ul {
+  list-style: none;
+}
+
+.mission-card li {
+  padding: 8px 0;
+  padding-left: 24px;
+  position: relative;
+  line-height: 1.8;
+}
+
+.mission-card li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.mission-card p {
+  line-height: 1.8;
+}
+
+.sdg-section {
+  padding: 96px 24px;
+  background: var(--bg-light);
+}
+
+.sdg-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.sdg-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.sdg-badge {
+  display: inline-block;
+  background: var(--primary-color);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.sdg-text h3 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.sdg-objective {
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-light);
+  margin-bottom: 24px;
+  line-height: 1.8;
+}
+
+.sdg-relevance {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  border-left: 4px solid var(--success-color);
+}
+
+.sdg-relevance h4 {
+  color: var(--success-color);
+  margin-bottom: 12px;
+}
+
+.sdg-relevance p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.partnerships-section {
+  padding: 96px 24px;
+  background: var(--bg-white);
+}
+
+.partnership-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.partnership-card {
+  background: var(--bg-light);
+  padding: 40px 32px;
+  border-radius: 16px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.partnership-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.partnership-icon {
+  font-size: 3rem;
+  margin-bottom: 16px;
+}
+
+.partnership-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 16px;
+  color: var(--text-dark);
+}
+
+.partnership-card p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.challenges-section {
+  padding: 96px 24px;
+  background: var(--bg-light);
+}
+
+.challenges-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.challenge-item {
+  background: white;
+  padding: 32px 24px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.challenge-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.challenge-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+
+.challenge-item h3 {
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+.challenge-item p {
+  color: var(--text-light);
+  line-height: 1.8;
+}
+
+.impact-section {
+  padding: 96px 24px;
+  background: var(--bg-white);
+}
+
+.impact-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 48px;
+}
+
+.stat-card {
+  position: relative;
+  height: 400px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: scale(1.02);
+}
+
+.stat-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stat-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  padding: 32px 24px;
+  color: white;
+}
+
+.stat-overlay h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+
+.stat-overlay p {
+  font-size: 1rem;
+  opacity: 0.9;
+}
+
+.contact-section {
+  padding: 96px 24px;
+  background: var(--bg-light);
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 48px;
+}
+
+.contact-text h3 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: var(--text-dark);
+}
+
+.contact-text p {
+  color: var(--text-light);
+  margin-bottom: 16px;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+.contact-emphasis {
+  font-weight: 600;
+  color: var(--text-dark);
+  font-size: 1.15rem;
+  margin: 24px 0;
+}
+
+.contact-info {
+  background: white;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 24px;
+  border-left: 4px solid var(--primary-color);
+}
+
+.contact-info p {
+  margin-bottom: 12px;
+}
+
+.contact-image img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.footer {
+  background: var(--text-dark);
+  color: white;
+  padding: 64px 24px 24px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.footer-section h4 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  color: var(--accent-color);
+}
+
+.footer-section p {
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+  color: var(--accent-color);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: 72px;
+    left: -100%;
+    flex-direction: column;
+    background: white;
+    width: 100%;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: left 0.3s ease;
+    gap: 16px;
+  }
+
+  .nav-menu.active {
+    left: 0;
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+
+  .hero-slogan {
+    font-size: 1.25rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .problem-content,
+  .sdg-content,
+  .contact-content {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .problem-image img,
+  .sdg-image img,
+  .contact-image img {
+    height: 300px;
+  }
+
+  .board-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .about-grid,
+  .mission-grid,
+  .partnership-grid,
+  .challenges-grid,
+  .impact-stats {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .hero-slogan {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    padding: 12px 32px;
+    font-size: 1rem;
+  }
+
+  .section-title {
+    font-size: 1.75rem;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .about-section,
+  .problem-section,
+  .board-section,
+  .mission-section,
+  .sdg-section,
+  .partnerships-section,
+  .challenges-section,
+  .impact-section,
+  .contact-section {
+    padding: 64px 16px;
+  }
+}
+
+  </style>
+</head>
+
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <h2>LEAGUE OF LEARNING</h2>
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#board">Board</a></li>
+        <li><a href="#mission">Mission</a></li>
+        <li><a href="#partnerships">Partnerships</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section id="home" class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">LEAGUE OF LEARNING</h1>
+      <p class="hero-slogan">Bridging distances, building futures</p>
+      <a href="#about" class="cta-button">Learn More</a>
+    </div>
+  </section>
+
+  <section id="about" class="about-section">
+    <div class="container">
+      <h2 class="section-title">Our Mission</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <div class="card-icon">🎓</div>
+          <h3>Quality Education</h3>
+          <p>Supporting SDG 4 to ensure inclusive and equitable quality education for all in Tunisia</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🌍</div>
+          <h3>Bridging Gaps</h3>
+          <p>Addressing distance, infrastructure, and digital divide challenges in rural areas</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🤝</div>
+          <h3>Community Focus</h3>
+          <p>Building relationships and creating opportunities for lifelong learning</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem" class="problem-section">
+    <div class="container">
+      <h2 class="section-title">The Challenge</h2>
+      <div class="problem-content">
+        <div class="problem-image">
+          <img src="https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rural education challenges" />
+        </div>
+        <div class="problem-text">
+          <h3>Education Inequality in Tunisia</h3>
+          <p>Many rural areas in Tunisia face significant educational challenges:</p>
+          <ul class="challenge-list">
+            <li><strong>Distance & Accessibility:</strong> Limited access to schools in remote regions</li>
+            <li><strong>Infrastructure Deficiency:</strong> Poor urban planning and lack of transport</li>
+            <li><strong>Digital Divide:</strong> Unequal access to digital learning resources</li>
+            <li><strong>Regional Disparity:</strong> Uneven development across different areas</li>
+          </ul>
+          <div class="root-causes">
+            <h4>Root Causes:</h4>
+            <p>Uneven regional development, poor urban planning, low population density in rural zones, and lack of school transport infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="board" class="board-section">
+    <div class="container">
+      <h2 class="section-title">Board of Directors</h2>
+      <p class="section-subtitle">Our NGO is managed by a motivated team of five members who share a common goal of improving education in Tunisia</p>
+      <div class="board-grid">
+        <div class="board-member">
+          <div class="member-avatar">
+            <img src="https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Achref Dridi" />
+          </div>
+          <h3>Achref Dridi</h3>
+          <p class="member-role">President</p>
+          <p class="member-description">Oversees strategic direction and partnerships</p>
+        </div>
+        <div class="board-member">
+          <div class="member-avatar">
+            <img src="https://images.pexels.com/photos/3763188/pexels-photo-3763188.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Alaa Ben Chuiiiikha" />
+          </div>
+          <h3>Alaa Ben Chuiiiikha</h3>
+          <p class="member-role">Vice President</p>
+          <p class="member-description">Coordinates ongoing projects</p>
+        </div>
+        <div class="board-member">
+          <div class="member-avatar">
+            <img src="https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Feres Brahmi" />
+          </div>
+          <h3>Feres Brahmi</h3>
+          <p class="member-role">Secretary</p>
+          <p class="member-description">Handles documentation and internal communication</p>
+        </div>
+        <div class="board-member">
+          <div class="member-avatar">
+            <img src="https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Amine Sbii" />
+          </div>
+          <h3>Amine Sbii</h3>
+          <p class="member-role">Treasurer</p>
+          <p class="member-description">Manages finances and fundraising</p>
+        </div>
+        <div class="board-member">
+          <div class="member-avatar">
+            <img src="https://images.pexels.com/photos/2169434/pexels-photo-2169434.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Rami Sassi" />
+          </div>
+          <h3>Rami Sassi</h3>
+          <p class="member-role">Community Outreach Officer</p>
+          <p class="member-description">Builds relationships with communities</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mission" class="mission-section">
+    <div class="container">
+      <div class="mission-grid">
+        <div class="mission-card">
+          <h3>📌 Our Values</h3>
+          <ul>
+            <li>Inclusivity and equity in education</li>
+            <li>Community empowerment</li>
+            <li>Innovation and sustainability</li>
+            <li>Transparency and accountability</li>
+          </ul>
+        </div>
+        <div class="mission-card">
+          <h3>🎯 Our Vision</h3>
+          <p>A Tunisia where every child has access to quality education, regardless of their location or socioeconomic background.</p>
+        </div>
+        <div class="mission-card">
+          <h3>💡 Our Mission</h3>
+          <p>To bridge educational gaps in rural Tunisia through infrastructure development, digital access, and community engagement.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="sdg" class="sdg-section">
+    <div class="container">
+      <h2 class="section-title">UN Sustainable Development Goal 4</h2>
+      <div class="sdg-content">
+        <div class="sdg-image">
+          <img src="https://images.pexels.com/photos/6476589/pexels-photo-6476589.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Quality Education" />
+        </div>
+        <div class="sdg-text">
+          <div class="sdg-badge">SDG 4</div>
+          <h3>Quality Education</h3>
+          <p class="sdg-objective">"Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all."</p>
+          <div class="sdg-relevance">
+            <h4>Relevance to Tunisia:</h4>
+            <p>Many rural areas face limited access to schools and resources. Distance, infrastructure, and lack of digital access create inequality in learning opportunities. The Tunisian education system faces significant challenges, particularly in rural and remote regions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="partnerships" class="partnerships-section">
+    <div class="container">
+      <h2 class="section-title">Partnerships & Future Goals</h2>
+      <div class="partnership-grid">
+        <div class="partnership-card">
+          <div class="partnership-icon">🏛️</div>
+          <h3>Government Partnerships</h3>
+          <p><strong>Ministry of Education:</strong> Collaborate on rural school renovations and teacher training programs</p>
+        </div>
+        <div class="partnership-card">
+          <div class="partnership-icon">🌐</div>
+          <h3>International Organizations</h3>
+          <p><strong>UNICEF / UNESCO:</strong> Technical assistance for inclusive and digital education programs</p>
+        </div>
+        <div class="partnership-card">
+          <div class="partnership-icon">❤️</div>
+          <h3>NGO Collaborations</h3>
+          <p><strong>Tunisian Red Crescent:</strong> Awareness campaigns and school supply distribution</p>
+        </div>
+        <div class="partnership-card">
+          <div class="partnership-icon">🤝</div>
+          <h3>Local NGOs</h3>
+          <p>Community engagement, volunteer recruitment, and local support initiatives</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenges" class="challenges-section">
+    <div class="container">
+      <h2 class="section-title">Challenges We May Face</h2>
+      <div class="challenges-grid">
+        <div class="challenge-item">
+          <div class="challenge-icon">💰</div>
+          <h3>Financial</h3>
+          <p>Securing sustainable funding for infrastructure and digital equipment</p>
+        </div>
+        <div class="challenge-item">
+          <div class="challenge-icon">⚖️</div>
+          <h3>Political</h3>
+          <p>Navigating bureaucracy and obtaining government approvals</p>
+        </div>
+        <div class="challenge-item">
+          <div class="challenge-icon">👥</div>
+          <h3>Social</h3>
+          <p>Changing traditional mindsets resistant to new educational methods</p>
+        </div>
+        <div class="challenge-item">
+          <div class="challenge-icon">🚚</div>
+          <h3>Logistical</h3>
+          <p>Reaching and supporting remote communities with limited resources</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="impact" class="impact-section">
+    <div class="container">
+      <h2 class="section-title">Our Impact Vision</h2>
+      <div class="impact-stats">
+        <div class="stat-card">
+          <img src="https://images.pexels.com/photos/5212317/pexels-photo-5212317.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Students learning" />
+          <div class="stat-overlay">
+            <h3>Empowering Students</h3>
+            <p>Creating access to quality education</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <img src="https://images.pexels.com/photos/8500285/pexels-photo-8500285.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Community engagement" />
+          <div class="stat-overlay">
+            <h3>Building Communities</h3>
+            <p>Strengthening local support networks</p>
+          </div>
+        </div>
+        <div class="stat-card">
+          <img src="https://images.pexels.com/photos/5905857/pexels-photo-5905857.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Digital learning" />
+          <div class="stat-overlay">
+            <h3>Digital Access</h3>
+            <p>Bridging the technological divide</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section">
+    <div class="container">
+      <h2 class="section-title">Get Involved</h2>
+      <div class="contact-content">
+        <div class="contact-text">
+          <h3>Join Our Mission</h3>
+          <p>League of Learning strives to build a future where no child in Tunisia is left behind due to distance or poor infrastructure.</p>
+          <p class="contact-emphasis">By working together, we can make education accessible for all and contribute to achieving SDG 4 – Quality Education.</p>
+          <div class="contact-info">
+            <p><strong>📧 Email:</strong> contact@leagueoflearning.org</p>
+            <p><strong>📍 Location:</strong> Tunisia</p>
+            <p><strong>🌐 Connect:</strong> Follow our journey toward educational equity</p>
+          </div>
+        </div>
+        <div class="contact-image">
+          <img src="https://img.freepik.com/free-photo/schoolchildren-reading-library_1098-4048.jpg?semt=ais_hybrid&w=740&q=80" alt="Children learning together" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>LEAGUE OF LEARNING</h3>
+          <p>Bridging distances, building futures</p>
+        </div>
+        <div class="footer-section">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#board">Board</a></li>
+            <li><a href="#mission">Mission</a></li>
+            <li><a href="#partnerships">Partnerships</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h4>Contact</h4>
+          <p>Email: contact@leagueoflearning.org</p>
+          <p>Tunisia</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 League of Learning. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
